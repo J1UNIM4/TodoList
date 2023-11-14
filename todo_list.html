@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>DBP</title>
+    <link rel="stylesheet" href="style.css">
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+   document.querySelector('#new-task').onsubmit = () => {
+    const cb = document.createElement("INPUT");
+    cb.setAttribute("type", "checkbox");
+    
+    const li = document.createElement('li');
+    li.appendChild(cb);
+
+    const b = document.createElement('INPUT');
+    b.setAttribute("type","submit");
+    b.setAttribute("value","x");
+
+    li.innerHTML += document.querySelector('#task').value;
+    li.appendChild(b);
+
+
+    document.querySelector('#tasks').append(li);
+
+    document.querySelector('#task').value = '';
+
+    list = document.querySelector('#tasks');
+    list.addEventListener("click",function(e){
+        if(e.target.tagName ==="INPUT" && e.target.type == "checkbox"){
+          cb2 =  e.target;
+          lo = cb2.parentElement;
+          if(cb2.checked == true){
+            lo.style.textDecoration = "line-through";
+          }else{
+            lo.style.textDecoration = "none";
+          }
+        }
+        else if(e.target.tagName ==="INPUT" && e.target.type == "submit"){
+          e.target.parentElement.remove();
+        }
+      },false)
+
+    
+
+    return false;
+    };
+});
+
+function llenar(){
+  lista = document.querySelector('#tasks');
+  if(lista.hasChildNodes()){
+    list = lista.children;
+    for(l of list){
+      l.style.textDecoration = "line-through";
+      l.firstElementChild.checked = "true";
+    }
+  }
+}
+</script>
+
+</head>
+<body>
+  <div class="caja">
+    <div class="container">
+      <p>Computer Science</p>
+      <h1>Tasks</h1>
+      <form id="new-task">
+        <input id="task" autocomplete="off"
+          autofocus placeholder="New Task"
+          type="text">
+        <input type="submit" value="add" class="add">
+      </form>
+      <button onclick="llenar()">COMPLETE ALL</button>
+      <ol id="tasks">
+      </ol>
+    </div>
+  </div>
+  
+
+</body>
+</html>
